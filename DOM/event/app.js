@@ -17,10 +17,12 @@ for (let color of colorList) {
   boxContainer.appendChild(box);
 
   box.addEventListener("mouseover", () => {
+    console.log(this); //since it is an arrow function this refers to window object
     box.classList.add("zoom");
   });
 
-  box.addEventListener("mouseleave", () => {
+  box.addEventListener("mouseleave", function () {
+    console.log(this); //here this refers to the element itself
     box.classList.remove("zoom");
   });
 }

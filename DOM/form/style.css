@@ -1,0 +1,35 @@
+* {
+  font-family: "helvetica";
+}
+
+section {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+#my-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.checkbox {
+  display: flex;
+  gap: 1rem;
+}
+
+input[type="submit"] {
+  background-color: #8758ff;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 7px;
+  letter-spacing: 2px;
+}
+
+input[type="submit"]:hover {
+  opacity: 0.8;
+}

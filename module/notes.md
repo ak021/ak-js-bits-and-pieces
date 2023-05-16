@@ -31,3 +31,5 @@ Now we have the files , now how these values are actually exchanged between the 
 Take multiple different modules combine them all together and some how link them into a one single file, also be responsible to make sure that the value declared inside one module is communicated over to other module.
 
 ![Bundler](./bundler.png)
+
+> Webpack doesnt work with the browser that well, so the solutions is to use **ESBuild**. ESbuild can **transpile** and **bundle** our code in all the browser.

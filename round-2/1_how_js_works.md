@@ -32,6 +32,20 @@
 >
 > <span style="color:aqua">How javascript manages this creation and deletion of execution context?  
 > </span> It manages this through a datastructure called
-> <span style="color:lime">**Call stack.**</span>
+> <span style="color:lime">**Call stack.**</span>  
+> **<span style="color:lime">_Call Stack</span> maintains the order of execution of execution context_**
 >
-> ![call-stack](./ss/call-stack.png) - **whenever a js program is run, global execution context is first pushed inside a stack. - From there after new execution context are pushed to the stack. once that particular context done execution it is removed from the stack**
+> ```json
+> call stack is also called as
+> - Execution context stack
+> - Program Stack
+> - Control Stack
+> - Runtime Stack
+> - Machine Stack
+> ```
+>
+> ![call-stack](./ss/call-stack.png)
+>
+> - **whenever a js program is run, global execution context is first pushed inside a stack. - From there after new execution context are pushed to the stack. once that particular context done execution it is removed from the stack**
+>
+> - **once everything get executed call stack will be made empty**

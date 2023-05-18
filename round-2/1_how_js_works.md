@@ -24,7 +24,14 @@
 
 - ![working](./ss/working.png)
 
-> 1. **So when a JS code is executed, a global execution context will be created.**
-> 2. **and execution of the code happens in 2 phases**
->    1. <span style="color:aqua">**memory creation phase:**</span> here javascript will go through the code line by line and assign a special value called undefined to variables. Functions should be assigned with the actual code (actual function block).
->    2. <span style="color:aqua">**code execution phase**:</span>During this phase javascript started executing the code line by line, and those variables will get their actual values. Whenever there is a function invocation encounters , global context will pass the control to that function and then it will create <span style="color:lime">a new execution context</span> and it will follow the same memory allocation and code execution step. Once the function controll is given back to the global context the other execution context(used to execute the function ) will be removed.
+> 1.  **So when a JS code is executed, a global execution context will be created.**
+> 2.  **and execution of the code happens in 2 phases**
+>
+>     1.  <span style="color:aqua">**memory creation phase:**</span> here javascript will go through the code line by line and assign a special value called undefined to variables. Functions should be assigned with the actual code (actual function block).
+>     2.  <span style="color:aqua">**code execution phase**:</span>During this phase javascript started executing the code line by line, and those variables will get their actual values. Whenever there is a function invocation encounters , global context will pass the control to that function and then it will create <span style="color:lime">a new execution context</span> and it will follow the same memory allocation and code execution step. Once the function controll is given back to the global context the other execution context(used to execute the function ) will be removed.
+>
+> <span style="color:aqua">How javascript manages this creation and deletion of execution context?  
+> </span> It manages this through a datastructure called
+> <span style="color:lime">**Call stack.**</span>
+>
+> ![call-stack](./ss/call-stack.png) - **whenever a js program is run, global execution context is first pushed inside a stack. - From there after new execution context are pushed to the stack. once that particular context done execution it is removed from the stack**

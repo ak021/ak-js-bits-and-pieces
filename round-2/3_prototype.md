@@ -19,6 +19,10 @@
 
 > **In JavaScript, objects can inherit properties and methods from other objects. This is achieved through a mechanism called prototypal inheritance. Every object in JavaScript has an internal link to another object called its prototype. When accessing a property or method on an object, JavaScript looks for that property or method in the object itself. If it doesn't find it, it continues to look for it in the object's prototype. This process continues up the prototype chain until the property or method is found or until it reaches the top-level object.**
 
+> ![prototypal-inheritance](./ss/prototypal-inheritance.png)
+
+> **Check the above screenshot, In JavaScript's prototypical inheritance, the prototype of a child object will contain all the methods and properties defined in the prototype of its parent object.**
+
 ```js
 // Parent object
 const parent = {
@@ -33,4 +37,39 @@ const child = Object.create(parent);
 child.name = "Child";
 
 child.sayHello(); // "Hello from Child"
+```
+
+---
+
+### when we add a function to the constructor , whenever we instantiate an object from that function thos instance will also get that greet() function, so what is the difference when we define it with prototype?
+
+#### what exactly is the advantage?
+
+```js
+// Attaching a method directly to the constructor
+function PersonWithMethod(name) {
+  this.name = name;
+
+  this.greet = function () {
+    console.log("Hello, my name is " + this.name);
+  };
+}
+
+// Attaching a shared method to the prototype
+function PersonWithPrototype(name) {
+  this.name = name;
+}
+
+PersonWithPrototype.prototype.greet = function () {
+  console.log("Hello, my name is " + this.name);
+};
+
+var person1 = new PersonWithMethod("John");
+var person2 = new PersonWithMethod("Jane");
+
+var person3 = new PersonWithPrototype("Alice");
+var person4 = new PersonWithPrototype("Bob");
+
+console.log(person1.greet === person2.greet); // Output: false (different method instances)
+console.log(person3.greet === person4.greet);
 ```

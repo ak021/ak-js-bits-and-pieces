@@ -36,7 +36,7 @@ Number.isNaN(1 + undefined); // true
 >    <span style="color:aqua;font-size:15px">RegExp:</span>Represents a regular expression, used for pattern matching within strings.  
 >   <span style="color:aqua;font-size:15px">Map, Set, WeakMap, WeakSet:</span> Objects that provide specialized collections and data structures.
 
-## what is the difference between String and Object?
+## 2. what is the difference between String and Object?
 
 > 1. #### Strings are immutable
 >    In JavaScript, when we say that strings are immutable, it means that once a string is created, its value cannot be changed. Any operation or manipulation on a string actually creates a new string rather than modifying the original one. The original string remains unchanged.
@@ -61,3 +61,127 @@ Number.isNaN(1 + undefined); // true
 > 3. #### Lack of explicit instantiation:
 >    Unlike regular objects, strings do not require explicit instantiation using constructors or object literals. You can directly assign string literals to variables or use string manipulation methods without explicitly creating instances of the String object wrapper.  
 >     we dont need to explicitly say , "hello there , this guy is a string"
+
+---
+
+## 3. what is <span style="color:aqua;font-size:15px">object literal</span>?
+
+> In JavaScript, an object literal is a way to create and initialize an object using a concise syntax. It allows you to define key-value pairs, where the keys are strings (or identifiers) and the values can be any valid JavaScript expression.
+>
+> ```js
+> const person = {
+>   name: "John",
+>   age: 25,
+>   city: "New York",
+>   isAdmin: false,
+> };
+> ```
+
+---
+
+### 4. Ways to create an object?
+
+> 1. <span style="color:lime;font-size:15px">Object Literal Syntax:</span>
+>
+> ```js
+> const person = {
+>   name: "John",
+>   age: 25,
+>   city: "New York",
+> };
+> ```
+
+> 2. <span style="color:lime;font-size:15px">Constructor Function:</span>
+>
+> ```js
+> function Person(name, age, city) {
+>   this.name = name;
+>   this.age = age;
+>   this.city = city;
+> }
+> const person = new Person("John", 25, "New York");
+> ```
+
+> 2. <span style="color:lime;font-size:15px">Constructor Function:</span>
+>
+> ```js
+> function Person(name, age, city) {
+>   this.name = name;
+>   this.age = age;
+>   this.city = city;
+> }
+> const person = new Person("John", 25, "New York");
+> ```
+
+> 3. <span style="color:lime;font-size:15px">Object.create() method:</span>
+>
+> ```js
+> const personProto = {
+>   greeting: function () {
+>     console.log("Hello!");
+>   },
+> };
+>
+> const person = Object.create(personProto);
+> person.name = "John";
+> person.age = 25;
+> ```
+
+> 4. <span style="color:lime;font-size:15px">ES6 Classes:</span>
+>
+> ```js
+> class Person {
+>   constructor(name, age, city) {
+>     this.name = name;
+>     this.age = age;
+>     this.city = city;
+>   }
+> }
+>
+> const person = new Person("John", 25, "New York");
+> ```
+
+> 5. <span style="color:lime;font-size:15px">Factory Functions:</span>
+>
+> ```js
+> function createPerson(name, age, city) {
+>   return {
+>     name: name,
+>     age: age,
+>     city: city,
+>   };
+> }
+>
+> const person = createPerson("John", 25, "New York");
+> ```
+
+---
+
+## What is deep copy and shallow copy?
+
+> ### <span style="color:lime;">Shallow Copy:</span>
+>
+> - In JavaScript, a shallow copy refers to creating a new object or array that duplicates the top-level structure of the original object or array,<span style="color:orange;"> while still referencing the same nested objects or arrays.</span> In other words, a shallow copy only copies the values of the immediate properties or elements, but not the nested objects or arrays themselves.
+> - A shallow copy is a copy of an object that only copies the object's properties. <span style="color:orange;">Any properties that are objects themselves are not copied, but rather a reference to the original object is stored in the new object.</span> This means that if you change a property of the original object, the change will be reflected in the new object.
+>
+> <span style="color:aqua;"> Ways to create a shallow copy:</span>
+>
+> 1. **Object.assign(target, source):** Creates a shallow copy of the source object into the target object.
+> 2. **Spread syntax ({...}):** Creates a shallow copy of an object by spreading its properties into a new object.
+>
+> ```js
+> const originalObj = { a: 1, b: 2, c: { d: 3 } };
+> // Shallow copy using Object.assign()
+> const shallowCopy = Object.assign({}, originalObj);
+> originalObj.c.d = 4;
+> console.log(shallowCopy.c.d); // Output: 4 (both objects are affected)
+> ```
+
+> ### <span style="color:lime;">Deep Copy</span>
+>
+> Deep copy creates a completely independent copy of an object and all of its nested objects or arrays. It means that any changes made to the original or copied object will not affect each other.
+>
+> <span style="color:aqua;"> Ways to create a deep copy:</span>
+>
+> 1. **JSON.parse(JSON.stringify(object)):** Creates a shallow copy of the source object into the target object.
+> 2. **External lib, like lodash:** Creates a shallow copy of an object by spreading its properties into a new object.

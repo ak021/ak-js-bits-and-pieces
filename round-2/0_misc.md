@@ -20,6 +20,7 @@ Number.isNaN(1 + undefined); // true
 
 > - In JavaScript, primitive values are data types that are not objects and do not have properties or methods. They are immutable, meaning their values cannot be changed once they are created. JavaScript has six primitive types: undefined, null, boolean, number, string, and symbol.
 > - Primitive values are directly stored in memory and have a fixed size, which makes them more efficient to store and manipulate compared to objects.
+> - These primitive types are immutable, meaning their values cannot be changed once assigned. They are directly stored in memory and are compared by their value rather than by reference.
 >
 > <span style="color:aqua;font-size:15px">undefined:</span> Represents the absence of a value or an uninitialized variable.  
 >  <span style="color:aqua;font-size:15px">null:</span> Represents the intentional absence of any object value.  
@@ -157,7 +158,7 @@ Number.isNaN(1 + undefined); // true
 
 ---
 
-## What is deep copy and shallow copy?
+## 5. What is deep copy and shallow copy?
 
 > ### <span style="color:lime;">Shallow Copy:</span>
 >
@@ -185,3 +186,10 @@ Number.isNaN(1 + undefined); // true
 >
 > 1. **JSON.parse(JSON.stringify(object)):** Creates a shallow copy of the source object into the target object.
 > 2. **External lib, like lodash:** Creates a shallow copy of an object by spreading its properties into a new object.
+
+---
+
+## 6. Javascript is loosely typed (dynamically typed), what does that mean?
+
+- In JavaScript, being loosely typed or dynamically typed means that variables are not bound to a specific data type. You don't need to declare the type of a variable explicitly, and the type of a variable can change dynamically during runtime.
+- Type Inference: JavaScript infers the data type of a variable based on the assigned value. The type of a variable can change dynamically when a new value of a different type is assigned to it.

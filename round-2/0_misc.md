@@ -193,3 +193,8 @@ Number.isNaN(1 + undefined); // true
 
 - In JavaScript, being loosely typed or dynamically typed means that variables are not bound to a specific data type. You don't need to declare the type of a variable explicitly, and the type of a variable can change dynamically during runtime.
 - Type Inference: JavaScript infers the data type of a variable based on the assigned value. The type of a variable can change dynamically when a new value of a different type is assigned to it.
+
+---
+
+7. ## Memory Leak
+   > - _**In programming, a memory leak occurs when a program unintentionally allocates memory but fails to release it when it is no longer needed. As a result, memory resources are consumed and not properly freed, leading to the accumulation of unused memory over time.**_

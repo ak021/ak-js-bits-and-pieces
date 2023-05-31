@@ -18,6 +18,23 @@ function createCounter() {
   };
 }
 
+function CreateCounterWithThis() {
+  let count = 0;
+
+  this.increment = function () {
+    count++;
+  };
+  this.decrement = function () {
+    count--;
+  };
+  this.getCount = function () {
+    return count;
+  };
+}
+
+const newCounter = new CreateCounterWithThis();
+newCounter.increment();
+
 var counter = createCounter();
 console.log(counter.getCount()); // Output: 0
 counter.increment();

@@ -1,13 +1,9 @@
 function testClosure() {
-  let i = 100;
+  var i = 100;
   console.log("inside test CLosure fn");
-
-  for (let i = 0; i < 3; i++) {
-    setTimeout(() => {
-      console.log(i);
-    }, 1000);
-  }
-
+  setTimeout(() => {
+    console.log(i);
+  }, 2000);
   i = 2023;
 }
 

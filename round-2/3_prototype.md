@@ -41,7 +41,7 @@ child.sayHello(); // "Hello from Child"
 
 ---
 
-### when we add a function to the constructor , whenever we instantiate an object from that function thos instance will also get that greet() function, so what is the difference when we define it with prototype?
+### when we add a function to the constructor , whenever we instantiate an object from that function those instance will also get that greet() function, so what is the difference when we define it with prototype?
 
 #### what exactly is the advantage?
 

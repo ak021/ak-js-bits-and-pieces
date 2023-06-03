@@ -103,17 +103,6 @@ Number.isNaN(1 + undefined); // true
 > const person = new Person("John", 25, "New York");
 > ```
 
-> 2. <span style="color:lime;font-size:15px">Constructor Function:</span>
->
-> ```js
-> function Person(name, age, city) {
->   this.name = name;
->   this.age = age;
->   this.city = city;
-> }
-> const person = new Person("John", 25, "New York");
-> ```
-
 > 3. <span style="color:lime;font-size:15px">Object.create() method:</span>
 >
 > ```js
@@ -198,3 +187,13 @@ Number.isNaN(1 + undefined); // true
 
 7. ## Memory Leak
    > - _**In programming, a memory leak occurs when a program unintentionally allocates memory but fails to release it when it is no longer needed. As a result, memory resources are consumed and not properly freed, leading to the accumulation of unused memory over time.**_
+
+---
+
+### 8. which means by using async await we are blocking the javascript main thread?
+
+> No, using async/await does not block the JavaScript main thread. In fact, async/await is designed to work with asynchronous operations without blocking the main thread.
+>
+> When you use async/await, the await keyword suspends the execution of the async function, allowing other tasks on the main thread to continue running. While the function is waiting for the promise to resolve, it doesn't block the main thread but rather frees it up to perform other operations.
+>
+> In essence, await pauses the execution of the async function without blocking the main thread. It allows other code and events to be processed, making the application more responsive.

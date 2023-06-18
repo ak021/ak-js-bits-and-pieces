@@ -197,3 +197,28 @@ Number.isNaN(1 + undefined); // true
 > When you use async/await, the await keyword suspends the execution of the async function, allowing other tasks on the main thread to continue running. While the function is waiting for the promise to resolve, it doesn't block the main thread but rather frees it up to perform other operations.
 >
 > In essence, await pauses the execution of the async function without blocking the main thread. It allows other code and events to be processed, making the application more responsive.
+
+---
+
+### async and defer.
+
+## ![async-defer](./ss/async-defer.png)
+
+### Debouncing and Throtling
+
+> In the context of JavaScript, throttling and debouncing are techniques used to control the execution of certain functions in response to frequent events like scrolling, resizing, or typing. Here's a brief explanation of each:
+
+1. Throttling:
+
+   - Throttling is a technique that limits the frequency at which a function is invoked. It ensures that the function is executed at a maximum rate, usually by setting a delay between consecutive invocations.
+   - When an event occurs, the throttled function is called, and subsequent events within the throttling interval are ignored until the delay has elapsed. After the delay, the function can be invoked again with the next event.
+   - Throttling is useful in scenarios where you want to limit the execution rate of a function to prevent it from being called too frequently, which can improve performance and prevent overload.
+
+2. Debouncing:
+   - Debouncing is a technique that postpones the execution of a function until after a specific period of inactivity. It groups multiple sequential events into a single invocation of the function.
+   - When an event occurs, the debounced function is not immediately executed. Instead, a timer is started. If no further events occur within the specified time period, the function is finally invoked. If another event occurs before the timer elapses, the timer is reset.
+   - Debouncing is useful when you want to handle events that may occur rapidly in succession but only need to respond to the final event or when you want to delay the execution of a function until the user has finished a particular action.
+
+Both throttling and debouncing can be implemented using various JavaScript techniques, such as using timers (`setTimeout`, `setInterval`), event listeners, or specialized libraries. The specific implementation details may vary depending on the use case and the library or approach chosen.
+
+In summary, throttling and debouncing are techniques used to control the frequency or timing of function execution in response to events, with throttling limiting the rate of execution and debouncing postponing execution until a period of inactivity.

@@ -1,3 +1,7 @@
+### arrow function wont get their own this, 
+
+
+
 function sayHello() {
   console.log("Hello there !!");
   console.log(this);
@@ -40,8 +44,14 @@ const nameObject = {
   greetings() {
     console.log(this);
     this.timerID = setInterval(() => {
-      console.log(this.names); // but if its an arrow function inside setInterval then it will refer to the current exec context
+      console.log(this.names); // arrow function wont get their own this, so it refers to the this of greetings(), which is that object itself
     }, 2000);
+
+    greetings() {
+      console.log(this);
+      this.timerID = setInterval(function() {
+        console.log(this.names); // now this is an error, because inside setinterval it will get its own this that is window object.
+      }, 2000);
   },
 
   stop() {

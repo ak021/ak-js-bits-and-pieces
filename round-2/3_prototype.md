@@ -71,5 +71,60 @@ var person3 = new PersonWithPrototype("Alice");
 var person4 = new PersonWithPrototype("Bob");
 
 console.log(person1.greet === person2.greet); // Output: false (different method instances)
-console.log(person3.greet === person4.greet);
+console.log(person3.greet === person4.greet); // output true
 ```
+
+---
+
+### how to modify prototype?
+
+To modify the prototype of an object or add new properties and methods to it, you can access the `prototype` property of the constructor function or the object itself and make changes to it. Here's an example:
+
+```javascript
+// Constructor function
+function Person(name) {
+  this.name = name;
+}
+
+// Adding a method to the prototype
+Person.prototype.greet = function () {
+  console.log(`Hello, my name is ${this.name}`);
+};
+
+// Creating an object
+const john = new Person("John");
+
+// Using the method defined in the prototype
+john.greet(); // Output: Hello, my name is John
+```
+
+In this example, we define a constructor function `Person` that creates objects with a `name` property. We then modify the `prototype` of the `Person` constructor function to add a `greet` method. The `greet` method is shared among all objects created from the `Person` constructor.
+
+By modifying the prototype, any existing or future objects created from the `Person` constructor will have access to the `greet` method. This allows for efficient code reuse and avoids duplicating the method for each object.
+
+It's important to note that modifying the prototype affects all objects created from that constructor function. If you add or modify a property or method in the prototype, it will be reflected in all existing and future objects that inherit from it.
+
+Keep in mind that modifying built-in prototypes (e.g., `Array.prototype`, `String.prototype`) is generally discouraged to avoid conflicts with other code. Modifying the prototypes of your own custom constructor functions is a common practice when implementing custom behavior and methods for your objects.
+
+---
+
+### Version2
+
+## What is prototype?
+
+> **In JavaScript, a prototype is an object that contains methods and properties that are shared by all objects that are created from a particular constructor function. For example, the Array constructor function has a prototype object that contains methods such as push(), pop(), and sort(). All arrays that are created using the Array constructor function inherit these methods from the prototype object.**
+>
+> **Prototypes are used to implement inheritance in JavaScript. Inheritance is a way of reusing code and creating new objects that have the same properties and methods as existing objects. When you create a new object using a constructor function, the object inherits the properties and methods from the constructor function's prototype object.**
+
+---
+
+## what is the difference between `prototype` and `__proto__` ?
+
+> - `prototype` is the actual prototype object which contains method and properties.
+> - where as `__proto__` is a reference to the prototype object.
+
+> #### note, just for my reference never mind.
+>
+> if you are creating an object with a constructor function, we need to attach prototype
+>
+> if we are creating an object from another object that parent object is attached as prototype.

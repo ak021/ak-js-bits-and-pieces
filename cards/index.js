@@ -28,7 +28,7 @@ const myDeck = {
     const { deck, suits, values } = this;
     for (let value of values.split(",")) {
       for (let suit of suits) {
-        deck.push({ suit, value });
+        deck.push({ suit, value }); 
       }
     }
   },

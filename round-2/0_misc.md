@@ -222,3 +222,59 @@ Number.isNaN(1 + undefined); // true
 Both throttling and debouncing can be implemented using various JavaScript techniques, such as using timers (`setTimeout`, `setInterval`), event listeners, or specialized libraries. The specific implementation details may vary depending on the use case and the library or approach chosen.
 
 In summary, throttling and debouncing are techniques used to control the frequency or timing of function execution in response to events, with throttling limiting the rate of execution and debouncing postponing execution until a period of inactivity.
+
+---
+
+## <span style="color:lime;">Why arrow function doesn't get its own this?</span>
+
+> - **The fact that arrow function wont get its own this will be helpful in scenerios like _setInterval()_**
+> - `Because the value of this depends upon how we are invoking.`
+>   If we call the function like below
+>
+> ```js
+> annoyer.start(); //here the this refers to the object
+> ```
+
+> `But in the case of setInterval function is not invoked like this.`
+> so it will refer to the window object
+
+> ```js
+> const annoyer = {
+> phrases: ["literally","basically","Crazy Crazy"],
+> pickPhrase(){
+>  const {phrases} = this;
+>  const idx = Math.floor(Math.random() \* phrases.length);
+>  return phrases[idx];
+> },
+> start(){
+> // if we need to refer this inside a setInterval before
+> // arrow function it will look like this
+>  const that = this;
+>  setInterval(function(){
+>  console.log(that);
+>  console.log(that.pickPhrase);
+>  })
+>  }
+> }
+> ```
+
+> But if we are passing arrow function to the **_setInterval()_** then _**this**_ will work differently.
+>
+> ```js
+> const annoyer = {
+> phrases: ["literally","basically","Crazy Crazy"],
+> pickPhrase(){
+>  const {phrases} = this;
+>  const idx = Math.floor(Math.random() \* phrases.length);
+>  return phrases[idx];
+> },
+> start(){
+> // since arrow function doesnt get its own this, it will refer to the lexical scope, this refered in parent
+>
+>  setInterval(() => {
+>  console.log(that);
+>  console.log(that.pickPhrase);
+>  })
+>  }
+> }
+> ```

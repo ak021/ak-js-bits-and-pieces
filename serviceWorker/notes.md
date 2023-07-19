@@ -2,6 +2,8 @@
 
 ---
 
-> **A service worker is run in a worker context: it therefore has no DOM access, and runs on a different thread to the main JavaScript that powers your app, so it is non-blocking. It is designed to be fully async; as a consequence, APIs such as <span style="color:red">synchronous XHR</span> and <span style="color:red">Web Storage (localStorage and sessionStorage)</span> can't be used inside a service worker.**
+> **A service worker is basically a JavaScript file. One thing that differentiate a service worker file from a normal JavaScript file, is that a service worker runs in the background, off the browser’s main UI thread. Before we can start using service worker, we must register it as a background process. This is the first phase of the lifecycle. Since service workers are not yet supported in all browsers, we must first check to make sure the browser supports service workers. Below is a code we can use to register a service worker:.**
 
 ### Life Cycle
+
+> https://www.digitalocean.com/community/tutorials/demystifying-the-service-worker-lifecycle

@@ -23,3 +23,23 @@
 > ## The wrapper function is more like a shield
 >
 > ![debounce-2](./ss/debounce-2.png)
+
+---
+
+> ```js
+> const debounce = (func, delay) => {
+>   let timerId;
+>   return (...args) => {
+>     if (timerId) {
+>       clearTimeout(timerId);
+>     }
+>     timerId = setTimeout(() => {
+>       func.apply(null, args);
+>     }, delay);
+>   };
+> };
+>
+> const handleInput = debounce((event) => {
+>   fetchData(event.target.value);
+> }, 1000);
+> ```

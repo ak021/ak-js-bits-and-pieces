@@ -54,68 +54,74 @@ In summary, `sayHello()` is a regular function call, while `sayHello.call()` is 
 
 1. `bind`: The `bind` method creates a new function with a specified context (`this` value) and potentially pre-set arguments. It does not immediately invoke the function but returns a new function that can be invoked later.
 
-   ```javascript
-   function sayHello() {
-     console.log("Hello, " + this.name + "!");
-   }
+> `bind wont invoke immediately, and it can only receive one argument.`
 
-   const person = {
-     name: "John",
-   };
+```javascript
+function sayHello() {
+  console.log("Hello, " + this.name + "!");
+}
 
-   const sayHelloToJohn = sayHello.bind(person);
-   sayHelloToJohn(); // Output: "Hello, John!"
-   ```
+const person = {
+  name: "John",
+};
 
-   In this example, `bind` is used to create a new function `sayHelloToJohn` with the `person` object as the context. When `sayHelloToJohn` is invoked, it prints "Hello, John!" because the context is set to `person`.
+const sayHelloToJohn = sayHello.bind(person);
+sayHelloToJohn(); // Output: "Hello, John!"
+```
+
+In this example, `bind` is used to create a new function `sayHelloToJohn` with the `person` object as the context. When `sayHelloToJohn` is invoked, it prints "Hello, John!" because the context is set to `person`.
 
 2. `call`: The `call` method immediately invokes a function with a specified context (`this` value) and individual arguments passed as separate parameters.
 
-   ```javascript
-   function sayHello() {
-     console.log("Hello, " + this.name + "!");
-   }
+> `call  invoke immediately, and it can only receive one argument.`
 
-   const person = {
-     name: "John",
-   };
+```javascript
+function sayHello() {
+  console.log("Hello, " + this.name + "!");
+}
 
-   sayHello.call(person); // Output: "Hello, John!"
-   ```
+const person = {
+  name: "John",
+};
 
-   Here, `call` is used to invoke the `sayHello` function with the `person` object as the context. It directly executes the function and prints "Hello, John!".
+sayHello.call(person); // Output: "Hello, John!"
+```
+
+Here, `call` is used to invoke the `sayHello` function with the `person` object as the context. It directly executes the function and prints "Hello, John!".
 
 3. `apply`: The `apply` method is similar to `call`, but it accepts an array or array-like object as the second parameter to pass arguments to the function.
 
-   ```javascript
-   function sayHello() {
-     console.log("Hello, " + this.name + "!");
-   }
+> `apply  invoke immediately, and it can  receive multiple argument.`
 
-   const person = {
-     name: "John",
-   };
+```javascript
+function sayHello() {
+  console.log("Hello, " + this.name + "!");
+}
 
-   sayHello.apply(person); // Output: "Hello, John!"
-   ```
+const person = {
+  name: "John",
+};
 
-   In this example, `apply` is used to invoke the `sayHello` function with the `person` object as the context. The function is immediately executed, and it prints "Hello, John!".
+sayHello.apply(person); // Output: "Hello, John!"
+```
 
-   `apply` can also accept an array of arguments to pass to the function:
+In this example, `apply` is used to invoke the `sayHello` function with the `person` object as the context. The function is immediately executed, and it prints "Hello, John!".
 
-   ```javascript
-   function sayHello(firstName, lastName) {
-     console.log("Hello, " + firstName + " " + lastName + "!");
-   }
+`apply` can also accept an array of arguments to pass to the function:
 
-   const person = {
-     name: "John",
-   };
+```javascript
+function sayHello(firstName, lastName) {
+  console.log("Hello, " + firstName + " " + lastName + "!");
+}
 
-   sayHello.apply(person, ["Alice", "Smith"]); // Output: "Hello, Alice Smith!"
-   ```
+const person = {
+  name: "John",
+};
 
-   Here, the `apply` method is used to pass the array `["Alice", "Smith"]` as individual arguments to the `sayHello` function.
+sayHello.apply(person, ["Alice", "Smith"]); // Output: "Hello, Alice Smith!"
+```
+
+Here, the `apply` method is used to pass the array `["Alice", "Smith"]` as individual arguments to the `sayHello` function.
 
 To summarize, `bind` creates a new function with a bound context, `call` immediately invokes a function with a specified context and individual arguments, and `apply` immediately invokes a function with a specified context and an array of arguments.
 

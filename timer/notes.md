@@ -2,7 +2,7 @@
 >
 > #### so we need a work around for this.
 
-## `value of this inside a method.`
+## value of this inside a method.
 
 > ![this](./ss/this.png)
 
@@ -91,7 +91,7 @@ Here, `call` is used to invoke the `sayHello` function with the `person` object 
 
 3. `apply`: The `apply` method is similar to `call`, but it accepts an array or array-like object as the second parameter to pass arguments to the function.
 
-> `apply  invoke immediately, and it can  receive multiple argument.`
+> apply  invoke immediately, and it can  receive multiple argument.
 
 ```javascript
 function sayHello() {
@@ -127,51 +127,53 @@ To summarize, `bind` creates a new function with a bound context, `call` immedia
 
 ---
 
-> ## `this` is interesting,
->
-> #### arrow functon inside the class will be converted to some other format and will be redefined inside the constructor
+ ## `this` is interesting, when it come to class methods
 
-> ```js
-> class Timer {
->   // constructor is a function which get called automatically >whenever we create a new instance of the class.
->   constructor(durationInput, startButton, pauseButton) {
->     this.durationInput = durationInput;
->     this.startButton = startButton;
->     this.pauseButton = pauseButton;
->     console.log("inside constructor");
->     // this.startButton.addEventListener("click", this.start);
->   }
->   start = () => {
->     console.log("inside start");
->     console.log(this);
->   };
->
->   stop = () => {
->     console.log("this is stop func");
->   };
-> }
-> ```
+ #### arrow functon inside the class will be converted to some other format and will be redefined inside the constructor
+
+ ```js
+ class Timer {
+   // constructor is a function which get called automatically >whenever we create a new instance of the class.
+   constructor(durationInput, startButton, pauseButton) {
+     this.durationInput = durationInput;
+     this.startButton = startButton;
+     this.pauseButton = pauseButton;
+     console.log("inside constructor");
+     // this.startButton.addEventListener("click", this.start);
+   }
+   start = () => {
+     console.log("inside start");
+     console.log(this);
+   };
+
+   stop = () => {
+     console.log("this is stop func");
+   };
+ }
+ ```
 
 #### the above class will be converted to the below, so that every browser can understand. this will be the actual code that is executed inside a browser.
 
-> ```js
-> class Timer {
->   // constructor is a function which get called automatically >whenever we create a new instance of the class.
->   constructor(durationInput, startButton, pauseButton) {
->     _defineProperty(this, "start", () => {
->       console.log("inside start");
->       console.log(this);
->     });
->     _defineProperty(this, "stop", () => {
->       console.log("this is stop func");
->     });
->     this.durationInput = durationInput;
->     this.startButton = startButton;
->     this.pauseButton = pauseButton;
->     console.log("inside constructor");
->     // this.startButton.addEventListener("click", this.start);
->   }
-> }
-> ```
+ ```js
+ class Timer {
+   // it is guaranteed that inside constructor this refers to the class itself.
+   constructor(durationInput, startButton, pauseButton) {
+    // here this is going to be the valid line
+    console.log(this) // this refers to the class itself.
+     _defineProperty(this, "start", () => {
+       console.log("inside start");
+       console.log(this);
+     });
+     _defineProperty(this, "stop", () => {
+       console.log("this is stop func");
+     });
+     this.durationInput = durationInput;
+     this.startButton = startButton;
+     this.pauseButton = pauseButton;
+     console.log("inside constructor");
+     // this.startButton.addEventListener("click", this.start);
+   }
+ }
+ ```
 
-> ##### In this case this will get a value which is the parent's this, that is the instantiated object itself.
+ ### In this case this will get a value which is the parent's this, that is the instantiated object itself.

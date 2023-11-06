@@ -24,3 +24,28 @@ Color.prototype.rgba = function (a = 1.0) {
 
 const color1 = new Color(122, 221, 1);
 const color2 = new Color(122, 221, 1);
+
+
+function Car(brand, color, type){
+  this.brand = brand;
+  this.color = color;
+  this.type = type;
+}
+
+Car.prototype.getDetails = function () {
+  console.log({type: this.type, color: this.color, brand: this.brand});
+}
+
+Car.prototype.getColor = function(){
+  console.log(`Color of ${this.brand} is ${this.color}`);
+}
+
+const bmw = new Car("bmw","blue","suv");
+bmw.getDetails()
+const benz = new Car("benz", "black", "sedan");
+benz.getDetails();
+
+console.log(bmw.getDetails === benz.getDetails);
+bmw.getColor();
+benz.getColor();
+console.log(bmw.getColor === benz.getColor);

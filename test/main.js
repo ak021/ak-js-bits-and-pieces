@@ -1,36 +1,22 @@
-console.log("this is main js file");
-
-const colors = {
-    red: "#edfff",
-    black: "#000",
-    getColor(){
-        // first valid line above the arrow function
-        console.log({before:this});
-        const printThis = () => {
-            console.log({after:this});
-        }
-        printThis();
-    },
-    getHex: () => {
-        // first valid line will be outside the colors which is window object
-        console.log({hex: this})
+class Timer {
+    constructor(durationInput, startButton, pauseButton) {
+      this.durationInput = durationInput;
+      this.startButton = startButton;
+      this.pauseButton = pauseButton;
+  
+    //   this.startButton.addEventListener('click', () =>this.start());
+    //   this.startButton.addEventListener('click',this.start.bind(this));
+      this.startButton.addEventListener('click',this.start);
     }
-}
-
-colors.getColor();
-
-
-const cars = {
-    color:"green",
-    brand: "bently",
-    printCar(){
-        console.log(this);
+  
+    start = () => {
+     console.log("start got called!!!!");
     }
-}
-
-const newCar = {
-    color:"#fff"
-}
-
-newCar.printnewCar = cars.printCar;
-newCar.printnewCar();
+  }
+  
+  const durationInput = document.querySelector('#duration');
+  const startButton = document.querySelector('#start');
+  const pauseButton = document.querySelector('#pause');
+  
+  const timer = new Timer(durationInput, startButton, pauseButton);
+  

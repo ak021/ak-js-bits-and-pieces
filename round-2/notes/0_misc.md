@@ -18,24 +18,27 @@ Number.isNaN(1 + undefined); // true
 
 1. ## primitive types
 
-> - In JavaScript, primitive values are data types that are not objects and do not have properties or methods. They are immutable, meaning their values cannot be changed once they are created. JavaScript has six primitive types: undefined, null, boolean, number, string, and symbol.
-> - Primitive values are directly stored in memory and have a fixed size, which makes them more efficient to store and manipulate compared to objects.
-> - These primitive types are immutable, meaning their values cannot be changed once assigned. They are directly stored in memory and are compared by their value rather than by reference.
->
-> <span style="color:aqua;font-size:15px">undefined:</span> Represents the absence of a value or an uninitialized variable.  
->  <span style="color:aqua;font-size:15px">null:</span> Represents the intentional absence of any object value.  
->  <span style="color:aqua;font-size:15px">boolean:</span>Represents a logical value of either true or false.  
-> <span style="color:aqua;font-size:15px">number:</span> Represents numeric values, including integers and floating-point numbers.  
-> <span style="color:aqua;font-size:15px"> string:</span>Represents a sequence of characters enclosed in single quotes ('') or double quotes ("").  
-> <span style="color:aqua;font-size:15px">symbol:</span>Represents a unique and immutable value that can be used as an identifier for object properties. Symbols are often used for creating non-enumerable object properties.
->
-> - Apart from the primitive types, JavaScript also has non-primitive types, commonly referred to as objects. Objects are composite values that can hold key-value pairs and have methods. They can be created using object literals, constructors, or classes. Examples of non-primitive types include:  
->    <span style="color:aqua;font-size:15px">Object:</span>The most basic non-primitive type in JavaScript. Objects are mutable and can hold properties and methods.  
->    <span style="color:aqua;font-size:15px">Array:</span>: A special type of object that represents an ordered list of values.  
->    <span style="color:aqua;font-size:15px">Function:</span>: A callable object that can be invoked and perform a specific task.
->   <span style="color:aqua;font-size:15px">Date:</span> Represents a specific moment in time.  
->    <span style="color:aqua;font-size:15px">RegExp:</span>Represents a regular expression, used for pattern matching within strings.  
->   <span style="color:aqua;font-size:15px">Map, Set, WeakMap, WeakSet:</span> Objects that provide specialized collections and data structures.
+In JavaScript, primitive values are data types that are not objects and do not have properties or methods. They are immutable, meaning their values cannot be changed once they are created. JavaScript has six primitive types: undefined, null, boolean, number, string, and symbol.
+
+- Primitive values are directly stored in memory and have a fixed size, which makes them more efficient to store and manipulate compared to objects.
+- These primitive types are immutable, meaning their values cannot be changed once assigned. They are directly stored in memory and are compared by their value rather than by reference.
+
+**undefined:** Represents the absence of a value or an uninitialized variable.  
+ **null:** Represents the intentional absence of any object value.  
+**boolean:** Represents a logical value of either true or false.  
+ **number:** Represents numeric values, including integers and floating-point numbers.  
+ **string:** Represents a sequence of characters enclosed in single quotes ('') or double quotes ("").  
+ **symbol:** Represents a unique and immutable value that can be used as an identifier for object properties. Symbols are often used for creating non-enumerable object properties.
+
+Apart from the primitive types, JavaScript also has non-primitive types, commonly referred to as objects. Objects are composite values that can hold key-value pairs and have methods. They can be created using object literals, constructors, or classes. Examples of non-primitive types include:
+
+**Object:** The most basic non-primitive type in JavaScript. Objects are mutable and can hold properties and methods.  
+**Array:** A special type of object that represents an ordered list of values.  
+**Function:** A callable object that can be invoked and perform a specific task.  
+**Date:** Represents a specific moment in time.
+
+**RegExp:** Represents a regular expression, used for pattern matching within strings.  
+**Map, Set, WeakMap, WeakSet:** Objects that provide specialized collections and data structures.
 
 ## 2. what is the difference between String and Object?
 

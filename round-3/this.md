@@ -1,10 +1,22 @@
-> #### using this keyword inside a button event listener will not give you the object, instead it will refer to the button.
->
-> #### so we need a work around for this.
+# this
+
+In JavaScript, the **this** keyword refers to an object.  
+Which object depends on how **this** is being invoked (used or called).  
+The **this** keyword refers to different objects depending on how it is used:
+
+- In an object method, this refers to the object.
+- Alone, this refers to the global object.
+- In a function, this refers to the global object.
+- In an event, this refers to the element that received the event.
+- Methods like call(), apply(), and bind() can refer this to any object.
+
+#### using this keyword inside a button event listener will not give you the object, instead it will refer to the button.
+
+#### so we need a work around for this.
 
 ## value of this inside a method.
 
-> ![this](./ss/this.png)
+![this](./ss/this.png)
 
 ---
 
@@ -50,11 +62,11 @@ In summary, `sayHello()` is a regular function call, while `sayHello.call()` is 
 
 ### what is the difference between bind , call and apply in javascript functions?
 
-> In JavaScript, the `bind`, `call`, and `apply` methods are used to manipulate how a function is invoked and to control the context (`this` value) and arguments passed to the function. Here's a breakdown of the differences between these methods:
+In JavaScript, the `bind`, `call`, and `apply` methods are used to manipulate how a function is invoked and to control the context (`this` value) and arguments passed to the function. Here's a breakdown of the differences between these methods:
 
 1. `bind`: The `bind` method creates a new function with a specified context (`this` value) and potentially pre-set arguments. It does not immediately invoke the function but returns a new function that can be invoked later.
 
-> `bind wont invoke immediately, and it can only receive one argument.`
+`bind wont invoke immediately, and it can only receive one argument.`
 
 ```javascript
 function sayHello() {
@@ -91,7 +103,7 @@ Here, `call` is used to invoke the `sayHello` function with the `person` object 
 
 3. `apply`: The `apply` method is similar to `call`, but it accepts an array or array-like object as the second parameter to pass arguments to the function.
 
-> apply  invoke immediately, and it can  receive multiple argument.
+> apply invoke immediately, and it can receive multiple argument.
 
 ```javascript
 function sayHello() {
@@ -127,53 +139,53 @@ To summarize, `bind` creates a new function with a bound context, `call` immedia
 
 ---
 
- ## `this` is interesting, when it come to class methods
+## `this` is interesting, when it come to class methods
 
- #### arrow functon inside the class will be converted to some other format and will be redefined inside the constructor
+#### arrow functon inside the class will be converted to some other format and will be redefined inside the constructor
 
- ```js
- class Timer {
-   // constructor is a function which get called automatically >whenever we create a new instance of the class.
-   constructor(durationInput, startButton, pauseButton) {
-     this.durationInput = durationInput;
-     this.startButton = startButton;
-     this.pauseButton = pauseButton;
-     console.log("inside constructor");
-     // this.startButton.addEventListener("click", this.start);
-   }
-   start = () => {
-     console.log("inside start");
-     console.log(this);
-   };
+```js
+class Timer {
+  // constructor is a function which get called automatically >whenever we create a new instance of the class.
+  constructor(durationInput, startButton, pauseButton) {
+    this.durationInput = durationInput;
+    this.startButton = startButton;
+    this.pauseButton = pauseButton;
+    console.log("inside constructor");
+    // this.startButton.addEventListener("click", this.start);
+  }
+  start = () => {
+    console.log("inside start");
+    console.log(this);
+  };
 
-   stop = () => {
-     console.log("this is stop func");
-   };
- }
- ```
+  stop = () => {
+    console.log("this is stop func");
+  };
+}
+```
 
 #### the above class will be converted to the below, so that every browser can understand. this will be the actual code that is executed inside a browser.
 
- ```js
- class Timer {
-   // it is guaranteed that inside constructor this refers to the class itself.
-   constructor(durationInput, startButton, pauseButton) {
+```js
+class Timer {
+  // it is guaranteed that inside constructor this refers to the class itself.
+  constructor(durationInput, startButton, pauseButton) {
     // here this is going to be the valid line
-    console.log(this) // this refers to the class itself.
-     _defineProperty(this, "start", () => {
-       console.log("inside start");
-       console.log(this);
-     });
-     _defineProperty(this, "stop", () => {
-       console.log("this is stop func");
-     });
-     this.durationInput = durationInput;
-     this.startButton = startButton;
-     this.pauseButton = pauseButton;
-     console.log("inside constructor");
-     // this.startButton.addEventListener("click", this.start);
-   }
- }
- ```
+    console.log(this); // this refers to the class itself.
+    _defineProperty(this, "start", () => {
+      console.log("inside start");
+      console.log(this);
+    });
+    _defineProperty(this, "stop", () => {
+      console.log("this is stop func");
+    });
+    this.durationInput = durationInput;
+    this.startButton = startButton;
+    this.pauseButton = pauseButton;
+    console.log("inside constructor");
+    // this.startButton.addEventListener("click", this.start);
+  }
+}
+```
 
- ### In this case this will get a value which is the parent's this, that is the instantiated object itself.
+### In this case this will get a value which is the parent's this, that is the instantiated object itself.

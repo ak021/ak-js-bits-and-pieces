@@ -1,22 +1,28 @@
-class Timer {
-    constructor(durationInput, startButton, pauseButton) {
-      this.durationInput = durationInput;
-      this.startButton = startButton;
-      this.pauseButton = pauseButton;
-  
-    //   this.startButton.addEventListener('click', () =>this.start());
-    //   this.startButton.addEventListener('click',this.start.bind(this));
-      this.startButton.addEventListener('click',this.start);
-    }
-  
-    start = () => {
-     console.log("start got called!!!!");
-    }
-  }
-  
-  const durationInput = document.querySelector('#duration');
-  const startButton = document.querySelector('#start');
-  const pauseButton = document.querySelector('#pause');
-  
-  const timer = new Timer(durationInput, startButton, pauseButton);
-  
+async function sleep(timeout) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+}
+
+console.log("first");
+
+setTimeout(() => {
+  console.log("second");
+}, 0);
+
+console.log("third");
+await sleep(0);
+console.log("fourth");
+console.log("fifth");
+console.log("sixth");
+console.log("Seventh");
+
+const p = Promise.resolve("hello");
+
+p.then((val) => {
+  console.log(val);
+  // the below line returns a new promise
+  return `new ${val}`;
+}).then((newVal) => {
+  console.log(newVal);
+});

@@ -4,24 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="style.css"/>
   </head>
   <body>
-    <svg height="200" width="200">
-      <circle
-        r="90"
-        cx="100"
-        cy="100"
-        fill="transparent"
-        stroke="blue"
-        stroke-width="10"
-        stroke-dasharray="565"
-        stroke-dashoffset="-100"
-        transform="rotate(-90 100 100)"
-      />
-    </svg>
-    <input id="duration" value="30" />
-    <button id="start">Start</button>
-    <button id="pause">Pause</button>
+    <div class="timer">
+
+      <svg height="400" width="400">
+        <!-- transform="rotate(-90 100 100)" is  rotate and point of rotation -->
+        <circle
+          r="190"
+          cx="200"
+          cy="200"
+          fill="transparent"
+          stroke="blue"
+          stroke-width="15"
+          transform="rotate(-90 200 200)"
+        />
+      </svg>
+      <div class="control">
+        <input id="duration" value="30" />
+        <div class="btn-container">
+          <button id="start">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M8 17.175V6.825q0-.425.3-.713t.7-.287q.125 0 .263.037t.262.113l8.15 5.175q.225.15.338.375t.112.475q0 .25-.112.475t-.338.375l-8.15 5.175q-.125.075-.262.113T9 18.175q-.4 0-.7-.288t-.3-.712"
+              />
+            </svg>
+          </button>
+          <button id="pause">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+            >
+              <path fill="currentColor" d="M14 19V5h4v14zm-8 0V5h4v14z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
     <script src="index.js" type="module"></script>
   </body>
 </html>

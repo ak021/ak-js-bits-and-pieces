@@ -26,10 +26,10 @@ export default class Timer {
   }
 
   #start = () => {
-    if (this.#onStart) this.#onStart();
+    if (this.#onStart) this.#onStart(this.timeRemaining);
     this.#tick();
     this.#pause();
-    this.#interval = setInterval(this.#tick, 1000);
+    this.#interval = setInterval(this.#tick, 50);
   };
 
   #pause = () => {
@@ -44,8 +44,8 @@ export default class Timer {
       if (this.#onComplete) this.#onComplete();
       return;
     }
-    this.timeRemaining = this.timeRemaining - 1;
-    if (this.#onTick) this.#onTick();
+    this.timeRemaining = this.timeRemaining - 0.05;
+    if (this.#onTick) this.#onTick(this.timeRemaining);
   };
 
   get timeRemaining() {
@@ -53,6 +53,6 @@ export default class Timer {
   }
 
   set timeRemaining(time) {
-    this.#durationInput.value = time;
+    this.#durationInput.value = time.toFixed(2);
   }
 }

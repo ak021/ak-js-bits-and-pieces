@@ -113,3 +113,76 @@ This stops all propagation of the event in the bubbling phase.
 
 **Event delegation**  
 Event delegation is a technique in JavaScript where we delegate the responsibility of handling an event to a parent element. By doing so, we avoid attaching multiple event listeners to individual elements, especially when dealing with a large number of similar elements, such as a list or a table.
+
+---
+
+## what is "DOMContentLoaded" event, how is it different from "load" event?
+
+The **DOMContentLoaded** event is fired when the HTML document has been completely parsed, and all diferred scripts
+
+```html
+<script defer src="…">
+    or
+<script type="module">
+```
+
+have downloaded and executed.  
+It doesn't wait for other things like images, subframes, and async scripts to finish loading.
+
+But in the case of **load** event, the event is fired when the whole page has loaded, including all dependant resources such as **stylesheets, scripts, iframes, and images.** This is in contrast to DOMContentLoaded, which is fired as soon as the page DOM has been loaded, without waiting for resources to finish loading.
+
+## What is the difference between async and defer?
+
+Async and defer are boolean attributes which are used along script tag inorder to load the external scripts efficiently.
+
+- when we load a webpage 2 major things happen,
+  1. HTML parsing
+  2. Loading the scripts
+- loading the scripts contians 2 pars
+
+  1. fetching the script from the network
+  2. executing the script line by line
+
+- this loading the script behaviour changes based on the async or defer attribute which we provide
+
+**case 1: normal case**
+
+```html
+<script src="">
+```
+
+- in the normal case when a webpage is loaded, it starts to parse the HTML content of that webpage,
+- but when the browser encounters a `script` tag it stops the HTML parsing at that point and then fetch the script from the server, and then it will start executing the script.
+- After executing the script , Browser will continue prsing the HTML content
+- bottom line is **browser pauses the HTML parsing for a while**, scripts will block the rendering
+
+**case 2: using async attribute**
+
+```html
+<script src="" async>
+```
+
+- in the case of async attribute, HTML parsing will happen, and when the browser encounters a script tag with async attribute it will fetch the script from the server parallely.**it wont block the parsing**
+- but the moment the script is fetched, it will stop the HTML parsing and the execute the script which is being loaded.
+
+- after executing the script , Browser will continue parsing the HTML content
+
+**case 3: using defer attribute**
+
+```html
+<script src="" defer>
+```
+
+- in the case of defer attribute, HTML parsing will go on, and when the browser encounters any script tag that is fetched in parallel.
+- even after loading the external script, HTML content will continue to parse.
+- once the HTML is parsed , then the loaded script is executed,
+- **basically no blocking of HTML**
+
+![alt text](./ss/script-loading.png)
+
+**When to use what?**
+
+> note : async attribute doesnt guarantee the order of execution of the script, the one which is loaded first is executed first.  
+> But differ does gurantee the order of execution of the script
+
+- if the scripts are dependent, its better to use defer, because it will gurantee the order

@@ -31,4 +31,12 @@ Web performance is all about making websites fast, including making slow process
   **Performance metric:**  
    There is no single metric or test that can be run on a site to evaluate how a user "feels". However, there are a number of metrics that can be "helpful indicators":
 
-  1. **`First paint:`**
+  _the below metrics are googles performance metric for light house score_
+
+  1. **`First contentful paint:`** marks the time at which the first image or text is painted. FCP measures how long it takes the browser to render the first piece of DOM content after a user navigates to your page. (_0–1.8s green_)
+  2. **`Largest contentful paint:`** marks the time when the page's main content has likely loaded.LCP reports the render time of the largest image or text block visible in the viewport, relative to when the user first navigated to the page. LCP measures when the largest content element in the viewport is rendered to the screen. This approximates when the main content of the page is visible to users. (_0-2.5s green_ )
+  3. **`Speed Index:`** how quickly the contents of a page are visibly populated. (_0–3.4s green_)
+  4. **`Time to interactive:`** time taken by the webpage to be fully interactive.
+  5. **`Total blocking time:`** sum of time period between FCP and time to interactive. TBT measures the total amount of time that a page is blocked from responding to user input, such as mouse clicks, screen taps, or keyboard presses. The sum is calculated by adding the blocking portion of all long tasks between First Contentful Paint and Time to Interactive.
+     0–200ms is Green
+  6. **`Cumulative layout shift:`** indicates the movement of visible elements within the viewport . _A good CLS score will be under 0.1_

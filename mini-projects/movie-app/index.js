@@ -12,39 +12,6 @@ const fetchData = async (searchString) => {
   return response.data.Search;
 };
 
-const onMoiveSelect = async (movie) => {
-  const response = await axios.get("http://www.omdbapi.com/", {
-    params: {
-      apikey: "5a3bc03d",
-      i: movie.imdbID,
-    },
-  });
-  const movieTemplate = getMovieTemplate(response.data);
-  document.querySelector("#summary").innerHTML = movieTemplate;
-};
-
-const renderOption = (movie) => {
-  const movieImgSrc =
-    movie.Poster != "N/A"
-      ? movie.Poster
-      : "https://api.iconify.design/icon-park:movie-board.svg";
-
-  const option = `
-<img src="${movieImgSrc}" class="image is-32x32"/>
-${movie.Title}
-`;
-  return option;
-};
-
-createAutocomplete({
-  root: document.querySelector(".autocomplete"),
-  placeholder: "Search for a movieee",
-  fetchFn: fetchData,
-  renderOption: renderOption,
-  onOptionSelect: onMoiveSelect,
-  inputValue: (movie) => movie.Title,
-});
-
 const getMovieTemplate = (movieDetail) => {
   console.log({ movieDetail });
   return `
@@ -65,7 +32,7 @@ const getMovieTemplate = (movieDetail) => {
     <p class="subtitle">Awards</p>
   </article>
   <article class="notification is-primary">
-    <p class="title">${movieDetail.BoxOffice}</p>
+    <p class="title">${movieDetail.BoxOffice || "N/A"}</p>
     <p class="subtitle">Box Office</p>
   </article>
   <article class="notification is-primary">
@@ -82,3 +49,66 @@ const getMovieTemplate = (movieDetail) => {
   </article>
 `;
 };
+
+let leftMovie = null;
+let rightMovie = null;
+
+const onMoiveSelect = async (movie, summaryRoot, isLeft) => {
+  document.querySelector(".tutorial").classList.add("is-hidden");
+  const response = await axios.get("http://www.omdbapi.com/", {
+    params: {
+      apikey: "5a3bc03d",
+      i: movie.imdbID,
+    },
+  });
+  const movieTemplate = getMovieTemplate(response.data);
+  summaryRoot.innerHTML = movieTemplate;
+
+  if (isLeft) {
+    leftMovie = response.data;
+  } else {
+    rightMovie = response.data;
+  }
+
+  if (leftMovie && rightMovie) runComparison();
+};
+
+const runComparison = () => {
+  console.log("left and right movie is redy for comparison");
+};
+
+const renderOption = (movie) => {
+  const movieImgSrc =
+    movie.Poster != "N/A"
+      ? movie.Poster
+      : "https://api.iconify.design/icon-park:movie-board.svg";
+
+  const option = `
+<img src="${movieImgSrc}" class="image is-32x32"/>
+${movie.Title}
+`;
+  return option;
+};
+
+const autoCompleteConfig = {
+  placeholder: "Search for a movieee",
+  fetchFn: fetchData,
+  renderOption: renderOption,
+  inputValue: (movie) => movie.Title,
+};
+
+createAutocomplete({
+  ...autoCompleteConfig,
+  root: document.querySelector("#left-autocomplete"),
+  onOptionSelect: (movie) => {
+    onMoiveSelect(movie, document.querySelector("#left-summary"), true);
+  },
+});
+
+createAutocomplete({
+  ...autoCompleteConfig,
+  root: document.querySelector("#right-autocomplete"),
+  onOptionSelect: (movie) => {
+    onMoiveSelect(movie, document.querySelector("#right-summary"), false);
+  },
+});

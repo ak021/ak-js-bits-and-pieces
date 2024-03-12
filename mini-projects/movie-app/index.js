@@ -1,4 +1,4 @@
-import { debounce } from "./utils.js";
+import { createAutocomplete } from "./autocomplete.js";
 
 const fetchData = async (searchString) => {
   const response = await axios.get("http://www.omdbapi.com/", {
@@ -12,73 +12,73 @@ const fetchData = async (searchString) => {
   return response.data.Search;
 };
 
-const autoCompleteRoot = document.querySelector(".autocomplete");
-autoCompleteRoot.innerHTML = `
-  <label><b>Search for a movie</b></label>
-  <input class="input"/>
-  <div class="dropdown">
-    <div class="dropdown-menu">
-      <div class="dropdown-content results"></div>
-    </div>
-  </div>
+const onMoiveSelect = async (movie) => {
+  const response = await axios.get("http://www.omdbapi.com/", {
+    params: {
+      apikey: "5a3bc03d",
+      i: movie.imdbID,
+    },
+  });
+  const movieTemplate = getMovieTemplate(response.data);
+  document.querySelector("#summary").innerHTML = movieTemplate;
+};
+
+const renderOption = (movie) => {
+  const movieImgSrc =
+    movie.Poster != "N/A"
+      ? movie.Poster
+      : "https://api.iconify.design/icon-park:movie-board.svg";
+
+  const option = `
+<img src="${movieImgSrc}" class="image is-32x32"/>
+${movie.Title}
 `;
-
-const searchInput = document.querySelector("input");
-const dropdown = document.querySelector(".dropdown");
-const resultsWrapper = document.querySelector(".results");
-
-const renderMovies = (movies) => {
-  for (const movie of movies) {
-    const movieLink = document.createElement("a");
-    movieLink.classList.add("dropdown-item");
-    const movieImgSrc =
-      movie.Poster != "N/A"
-        ? movie.Poster
-        : "https://api.iconify.design/icon-park:movie-board.svg";
-    movieLink.innerHTML = `
-    <img src="${movieImgSrc}" class="image is-32x32"/>
-    ${movie.Title}
-    `;
-    resultsWrapper.appendChild(movieLink);
-  }
+  return option;
 };
 
-const renderEmptyResult = () => {
-  resultsWrapper.innerHTML = `
-  <div class="results-empty">
-  <img src="https://api.iconify.design/streamline:interface-folder-remove-remove-minus-folder-subtract-delete.svg" class="image is-24x24"/>
-  <p>No result found</p>
-  </div>
-  `;
-};
-
-const handleInputChange = async (e) => {
-  const searchString = e.target.value;
-
-  if (!searchString) {
-    dropdown.classList.remove("is-active");
-    return;
-  }
-
-  const movies = await fetchData(searchString);
-
-  // cleanup the previous search result
-  resultsWrapper.innerHTML = "";
-  dropdown.classList.add("is-active");
-
-  if (!movies.length) {
-    renderEmptyResult();
-  } else {
-    renderMovies(movies);
-  }
-};
-
-searchInput.addEventListener("input", debounce(handleInputChange));
-
-// listener to close the dropdown
-document.addEventListener("click", (event) => {
-  // if user clicks on any element which is not related to the autocomplete dropdown, then close it
-  if (!autoCompleteRoot.contains(event.target)) {
-    dropdown.classList.remove("is-active");
-  }
+createAutocomplete({
+  root: document.querySelector(".autocomplete"),
+  placeholder: "Search for a movieee",
+  fetchFn: fetchData,
+  renderOption: renderOption,
+  onOptionSelect: onMoiveSelect,
+  inputValue: (movie) => movie.Title,
 });
+
+const getMovieTemplate = (movieDetail) => {
+  console.log({ movieDetail });
+  return `
+  <article class="media">
+    <figure class="media-left">
+      <p class="image">
+        <img src="${movieDetail.Poster}"/>
+      </p>
+    </figure>
+    <div class="media-content">
+      <h1>${movieDetail.Title}</h1>
+      <h4>${movieDetail.Genre}</h4>
+      <p>${movieDetail.Plot}</p>
+    </div>
+  </article>
+  <article class="notification is-primary">
+    <p class="title">${movieDetail.Awards}</p>
+    <p class="subtitle">Awards</p>
+  </article>
+  <article class="notification is-primary">
+    <p class="title">${movieDetail.BoxOffice}</p>
+    <p class="subtitle">Box Office</p>
+  </article>
+  <article class="notification is-primary">
+    <p class="title">${movieDetail.Metascore}</p>
+    <p class="subtitle">Metascore</p>
+  </article>
+  <article class="notification is-primary">
+    <p class="title">${movieDetail.imdbRating}</p>
+    <p class="subtitle">IMDB Rating</p>
+  </article>
+  <article class="notification is-primary">
+    <p class="title">${movieDetail.imdbVotes}</p>
+    <p class="subtitle">IMDB Votes</p>
+  </article>
+`;
+};

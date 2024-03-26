@@ -38,10 +38,13 @@
 
 - **Head:** head element is a container for metadata, it contains information related to the webpage, such as title, styles , script, meta tags
 - **meta:** html meta tag gives metadata or information about the html document. it includes information like
+
   - characterset
   - keywords
   - viewport settings
-    meta tags are not visible on the webpage
+  - author of the document
+
+    _meta tags are not visible on the webpage_
 
 ```html
 <head>
@@ -63,3 +66,54 @@
 ```
 
 ## table in html
+
+## semantic html
+
+- semantics means relating to meaning
+- A semantic element clearly describes its meaning to both the browser and the developer.
+- using semantic html provides better accessibility
+- along with DOM and CSSOM, browser build a accessiblity tree, which assist the screen readers, so using semantic html will give better accessibility
+- some of the sematic html tags are
+  - header
+  - footer
+  - main
+  - section
+  - aside
+  - article
+  - nav
+
+---
+
+## SEO
+
+- we build our website by keeping our users in mind
+- one of the user is a search engine
+- search engine helps people discover the content
+
+> SEO is helping search engines to understand the content of the webpage, and thereby helps the users find our webpage, it is the process of improving our websites visibility in search engines whenever people search for anything related to our webpage
+
+#### Google (crawling and indexation)
+
+Google uses programs called crawlers to explore the web constantly inorder to add pages to the index.
+
+### SEO techniques
+
+#### 1. On page SEO
+
+- practice of optimizing elements of a website, such as content of the webpage, improving the HTML code
+  1. SEO keyword research
+  2. Quality SEO content, create content that is user friendly and SEO friendly
+  3. Metadata SEO optimization, involves optimizing the elements such as title tags, meta descriptions by doing that we can briefly convey what this page is all about
+  4. Image SEO optimization, giving descriptive filenames, alt tag and necessary captions.
+  5. URL structure
+
+#### off page SEO
+
+    - by ads
+
+#### technical SEO
+
+1. Site load time
+2. Mobile friendly
+3. Crawl error identification - identifying broken links, missing pages and other issues that can negatively impact search engine visibility
+4. duplicate content need to be removed

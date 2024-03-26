@@ -75,7 +75,7 @@ Loading a single resolution image may not be ideal. Say for example in a mobile 
 
 > note: we can use `picture` and `source` element with **media** and **size** attributes or `img` with **srcset** attribute to send the optimized image to the user
 
-**Device pixel ratio usecase**  
+##Device pixel ratio usecase
 There are device with high pixel ratio, for those device we might need to deliver a high resolution image, and for all others we might need to send a normal version
 
 ```html
@@ -85,7 +85,26 @@ There are device with high pixel ratio, for those device we might need to delive
 - here `srcset` attributes takes comma separated list of image URLs, each with an `x` descriptor stating which **device-pixel-ratio** that image is intended for
 - `src` is a fallback for browsers that doesnt support `srcset`
 
-**Fluid and variable sized image**
+## Fluid and variable sized image
+
+- here we give actual pixel width of the image (640w `w` as width)
+- if the screensize is less that 320px it will take image with width 320w,if it is greater than 320w it will take the next big image and so on
+- we are giving the size because, browser doesnt knows the size of the image before it loads, we are giving that extra information to the browser so that browser can use appropriate image, (it will only load the best image based on the circumstances)
+- giving the width like this will accomodate both the pixel density case and viewport width case ( browser will do some match and figure out which image is best for the current size and pixel density)
+- _since there is no size specified, browser assumes that our image is taking full vieport width_
+
+```html
+<img
+  srcset="large.jpg 1024w, medium.jpg 640w, small.jpg 320w"
+  src="small.jpg"
+  alt="A rad wolf"
+/>
+```
+
+**sizes:**
+
+- using size we can spicify a media query
+- `(min-width: 36em) 33.3vw, 100vw` says that when the width is `>= 36em` the width of the image will be `33.3vw` , and the rest of the time it is `100%` so choose the appropritate image from the list
 
 ```html
 <img
@@ -100,6 +119,8 @@ There are device with high pixel ratio, for those device we might need to delive
 > in the above approach browser will always shoes the higher resolution image available, it wont swap to the smaller resolution image once it download a higher resolution image.
 
 **Showing different image in different scree sizes**
+
+- here we need to give srcset, src wont work
 
 ```html
 <picture>

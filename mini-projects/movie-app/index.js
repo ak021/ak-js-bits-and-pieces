@@ -1,4 +1,4 @@
-import { debounce } from "./utils.js";
+import { createAutocomplete } from "./autocomplete.js";
 
 const fetchData = async (searchString) => {
   const response = await axios.get("http://www.omdbapi.com/", {
@@ -12,73 +12,103 @@ const fetchData = async (searchString) => {
   return response.data.Search;
 };
 
-const autoCompleteRoot = document.querySelector(".autocomplete");
-autoCompleteRoot.innerHTML = `
-  <label><b>Search for a movie</b></label>
-  <input class="input"/>
-  <div class="dropdown">
-    <div class="dropdown-menu">
-      <div class="dropdown-content results"></div>
+const getMovieTemplate = (movieDetail) => {
+  console.log({ movieDetail });
+  return `
+  <article class="media">
+    <figure class="media-left">
+      <p class="image">
+        <img src="${movieDetail.Poster}"/>
+      </p>
+    </figure>
+    <div class="media-content">
+      <h1>${movieDetail.Title}</h1>
+      <h4>${movieDetail.Genre}</h4>
+      <p>${movieDetail.Plot}</p>
     </div>
-  </div>
+  </article>
+  <article class="notification is-primary">
+    <p class="title">${movieDetail.Awards}</p>
+    <p class="subtitle">Awards</p>
+  </article>
+  <article class="notification is-primary">
+    <p class="title">${movieDetail.BoxOffice || "N/A"}</p>
+    <p class="subtitle">Box Office</p>
+  </article>
+  <article class="notification is-primary">
+    <p class="title">${movieDetail.Metascore}</p>
+    <p class="subtitle">Metascore</p>
+  </article>
+  <article class="notification is-primary">
+    <p class="title">${movieDetail.imdbRating}</p>
+    <p class="subtitle">IMDB Rating</p>
+  </article>
+  <article class="notification is-primary">
+    <p class="title">${movieDetail.imdbVotes}</p>
+    <p class="subtitle">IMDB Votes</p>
+  </article>
 `;
-
-const searchInput = document.querySelector("input");
-const dropdown = document.querySelector(".dropdown");
-const resultsWrapper = document.querySelector(".results");
-
-const renderMovies = (movies) => {
-  for (const movie of movies) {
-    const movieLink = document.createElement("a");
-    movieLink.classList.add("dropdown-item");
-    const movieImgSrc =
-      movie.Poster != "N/A"
-        ? movie.Poster
-        : "https://api.iconify.design/icon-park:movie-board.svg";
-    movieLink.innerHTML = `
-    <img src="${movieImgSrc}" class="image is-32x32"/>
-    ${movie.Title}
-    `;
-    resultsWrapper.appendChild(movieLink);
-  }
 };
 
-const renderEmptyResult = () => {
-  resultsWrapper.innerHTML = `
-  <div class="results-empty">
-  <img src="https://api.iconify.design/streamline:interface-folder-remove-remove-minus-folder-subtract-delete.svg" class="image is-24x24"/>
-  <p>No result found</p>
-  </div>
-  `;
-};
+let leftMovie = null;
+let rightMovie = null;
 
-const handleInputChange = async (e) => {
-  const searchString = e.target.value;
+const onMoiveSelect = async (movie, summaryRoot, isLeft) => {
+  document.querySelector(".tutorial").classList.add("is-hidden");
+  const response = await axios.get("http://www.omdbapi.com/", {
+    params: {
+      apikey: "5a3bc03d",
+      i: movie.imdbID,
+    },
+  });
+  const movieTemplate = getMovieTemplate(response.data);
+  summaryRoot.innerHTML = movieTemplate;
 
-  if (!searchString) {
-    dropdown.classList.remove("is-active");
-    return;
-  }
-
-  const movies = await fetchData(searchString);
-
-  // cleanup the previous search result
-  resultsWrapper.innerHTML = "";
-  dropdown.classList.add("is-active");
-
-  if (!movies.length) {
-    renderEmptyResult();
+  if (isLeft) {
+    leftMovie = response.data;
   } else {
-    renderMovies(movies);
+    rightMovie = response.data;
   }
+
+  if (leftMovie && rightMovie) runComparison();
 };
 
-searchInput.addEventListener("input", debounce(handleInputChange));
+const runComparison = () => {
+  console.log("left and right movie is redy for comparison");
+};
 
-// listener to close the dropdown
-document.addEventListener("click", (event) => {
-  // if user clicks on any element which is not related to the autocomplete dropdown, then close it
-  if (!autoCompleteRoot.contains(event.target)) {
-    dropdown.classList.remove("is-active");
-  }
+const renderOption = (movie) => {
+  const movieImgSrc =
+    movie.Poster != "N/A"
+      ? movie.Poster
+      : "https://api.iconify.design/icon-park:movie-board.svg";
+
+  const option = `
+<img src="${movieImgSrc}" class="image is-32x32"/>
+${movie.Title}
+`;
+  return option;
+};
+
+const autoCompleteConfig = {
+  placeholder: "Search for a movieee",
+  fetchFn: fetchData,
+  renderOption: renderOption,
+  inputValue: (movie) => movie.Title,
+};
+
+createAutocomplete({
+  ...autoCompleteConfig,
+  root: document.querySelector("#left-autocomplete"),
+  onOptionSelect: (movie) => {
+    onMoiveSelect(movie, document.querySelector("#left-summary"), true);
+  },
+});
+
+createAutocomplete({
+  ...autoCompleteConfig,
+  root: document.querySelector("#right-autocomplete"),
+  onOptionSelect: (movie) => {
+    onMoiveSelect(movie, document.querySelector("#right-summary"), false);
+  },
 });

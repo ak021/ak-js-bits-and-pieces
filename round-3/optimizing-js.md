@@ -41,7 +41,8 @@ function main() {
 }
 ```
 
-- inorder to mitigate this we run a **`yield`** function periodically
+- inorder to mitigate this we run a **`yield`** function periodically.
+- This means that our code is split into multiple tasks, between the execution of which the browser is given the opportunity to handle high-priority tasks such as updating the UI. A common pattern for this function uses setTimeout() to postpone execution into a separate task:
 
 ```js
 function yield() {
@@ -51,7 +52,9 @@ function yield() {
 }
 ```
 
-## requestAnimationFrame for animations
+## handling js animations
+
+**requestAnimationFrame for animations**
 
 - requestAnimationFrame let the user to run a function before the next repaint of the ui, so that the animations will be smooth;
 
@@ -62,3 +65,15 @@ function animation(timestamp) {
 // accept a callback, which is called with a timestamp
 requestAnimationFrame(animation);
 ```
+
+## Optimizing event performance
+
+- remove event listener that is not being used
+- use event delegation
+
+## other tips to improve js performace
+
+- use webworket to run long computations
+- reduced the manipulation of DOM
+- batch DOM changes
+-

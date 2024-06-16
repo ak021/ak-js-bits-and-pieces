@@ -117,3 +117,38 @@ Google uses programs called crawlers to explore the web constantly inorder to ad
 2. Mobile friendly
 3. Crawl error identification - identifying broken links, missing pages and other issues that can negatively impact search engine visibility
 4. duplicate content need to be removed
+
+## pre tag in html
+
+- pre tag is preformatted text,text will be displayed with the same space, new line indendation as in the html source code
+
+## Multimedia (Video and Audio)
+
+#### **video**
+
+- embeds a media player which supports video playback into the document.
+- we can use video tag to embed audio content as well, but there is specific tag called audio for embedding the audio which will give more appropritate user experience.
+
+```html
+<video controls width="250">
+  <source src="/media/cc0-videos/flower.webm" type="video/webm" />
+  <source src="/media/cc0-videos/flower.mp4" type="video/mp4" />
+</video>
+```
+
+some of the attributes include
+
+- autoplay
+- loop
+- controls
+- height width
+- muted
+
+**audio**
+
+```html
+<audio controls>
+  <source src="myAudio.mp3" type="audio/mpeg" />
+  <source src="myAudio.ogg" type="audio/ogg" />
+</audio>
+```

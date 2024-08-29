@@ -14,20 +14,20 @@
 ```js
 // mathches e or more than 1 e
 
-/[e+]/g;
+/e+/g;
 ```
 
 - `?`: 0 or 1 (optional)
 
 ```js
 // mathches all the e, and if there is ea, it will match ea
-/[ea?]/g;
+/ea?/g;
 ```
 
 - `*`: 0 or more
 
 // mathches all the e, and if there is e along with any number of a, it will match
-/[ea?]/g;
+/ea?/g;
 
 ```
 
@@ -37,7 +37,7 @@
 
 ```js
 // matchest cart, hart, part
-/[.art]/g;
+/.art/g;
 ```
 
 ---

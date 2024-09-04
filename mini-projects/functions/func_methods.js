@@ -1,4 +1,11 @@
 // call bind apply
+
+// call: binds the this value, invokes the function, and allows you to pass a list of arguments.
+
+// apply: binds the this value, invokes the function, and allows you to pass arguments as an array.
+
+// bind: binds the this value, returns a new function, and allows you to pass in a list of arguments.
+
 function sayHello(firstName, lastName) {
   console.log({ firstName });
   console.log({ lastName });

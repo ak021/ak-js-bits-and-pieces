@@ -9,7 +9,7 @@
 1. Null object pattern
 
 - This pattern can be used to avoid the null checks
-- also can provide a default object called NullObject , if incase the object is null or doesnt exist.
+- it provides a default object if incase original object is not present
 
 2. Builder pattern
    - builder patter is used to create object in steps.
